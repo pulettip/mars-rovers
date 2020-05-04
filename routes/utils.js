@@ -91,7 +91,7 @@ utils.processStringInput = (input) => {
     for (var i = 1; i < inputs.length; i++) {
         rover_number = (i == 1 ? i : (i / 2) + 0.5);
         try {
-            if (typeof inputs[i+1] == 'undefined') rover_object = {error: "Error - Only one line of instruction found for Rover number " + rover_number.toString(), success: false}
+            if (typeof inputs[i+1] == 'undefined') rover_object = {error: "Error - Only one line of instruction found for Rover number " + rover_number.toString(), success: false, journey: []}
             else rover_object = processMovementsRover(inputs[i], inputs[i+1]);
         }
         catch (e) {
