@@ -1,0 +1,47 @@
+extends layout
+
+block content
+    h1= title
+
+    if error == null
+        div.row
+            for rover in data
+
+                div.col-12.col-md-4
+                    div.card.text-center
+                        div.card-body
+                            h5.card-title Rover Number #{rover.rover_number}
+                            if rover.success == true
+                                div.card-text Succesfully trailed its path
+                                div.card-text Final Position was 
+                                    span.font-weight-bold #{rover.result}
+                            else
+                                div.card-text=rover.error
+
+                        if rover.journey.length > 0
+                            div.card-footer
+                                a.btn.btn-primary.view-journey(data-num=rover.rover_number) View Journey
+                                
+                                div.modal(data-num=rover.rover_number, tabindex="-1" role="dialog")
+                                    div.modal-dialog(role="document")
+                                        div.modal-content
+                                            div.modal-header
+                                                h5.modal-title Detail of the Journey:
+                                                button.close(type="button", data-dismiss="modal", aria-label="Close")
+                                                    span(aria-hidden="true") &times;
+                                          
+                                            div.modal-body
+                                                each movement, i in rover.journey
+                                                    if movement[3]
+                                                        div Movement: #{movement[3]} - Position: [#{movement[0]} , #{movement[1]}] - #{movement[2]}
+                                                    else
+                                                        div.bold Initial Position: [#{movement[0]} , #{movement[1]}] - #{movement[2]}
+
+                                                    if i == rover.journey.length - 1
+                                                        div.bold Final Position: [#{movement[0]} , #{movement[1]}] - #{movement[2]}
+                                          
+                                            div.modal-footer
+                                                button.btn.btn-secondary(type="button", data-dismiss="modal") Close
+
+    else
+        div #{error}

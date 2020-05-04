@@ -1,0 +1,38 @@
+body {
+  padding: 5vw;
+  font: 1em "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+textarea {
+	font-size: 1em;
+	width: 80vw;
+	max-width: 360px;
+}
+
+.submit {
+	font-size: 20px;
+	line-height: 10px;
+	height: 60px;
+	width: 80vw;
+	border-radius: 15px;
+	padding: 25px;
+	background-color: #1aff5b;
+	max-width: 320px;
+}
+
+.card {
+	margin: 1em 0;
+	min-height: 200px;
+}
+
+.hidden {
+	display: none;
+}
+
+.bold {
+	font-weight: 700;
+}
