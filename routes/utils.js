@@ -15,7 +15,7 @@ const rotate = (mov, dir) => {
     let index = directionArray.indexOf(dir);
     if (mov == 'R') index++;
     else index--;
-    index = index > 3 ? 0 : index < 0 ? 3 : index;
+    index = index > 3 ? 0 : index < 0 ? 3 : index;          // Evalute if the index is whitin the array, otherwise it reformulates
     return directionArray[index];
 };
 
@@ -27,6 +27,7 @@ const EstablishGrid = (coordinates) => {
     return getNumbers(x, y);
 };
 
+// Function to obtain the array response for each rover
 const processMovementsRover = (initial_position, movements) => {
     const buildResponse = (journey, error, success=false, result=null) => {
         return {
@@ -49,13 +50,13 @@ const processMovementsRover = (initial_position, movements) => {
     [x, y] = getNumbers(x, y);
     if (!controlPosition(x, y)) return buildResponse(journey_array, "Error - Initial position outside of limits: x: " + x + " - y: " + y);
 
-    dir = dir.toUpperCase();
+    dir = dir.toUpperCase();                            // Uppercase just to be sure
     if (directionArray.indexOf(dir) < 0) return buildResponse(journey_array, "Error - Unexpected value {" + dir + "} for initial direction");
     
     journey_array.push([x, y, dir]);
     
     for (var i = 0; i < mov_array.length; i++) {
-        mov = mov_array[i].toUpperCase();
+        mov = mov_array[i].toUpperCase();               // Uppercase just to be sure
         if (mov == 'R' || mov == 'L') dir = rotate(mov, dir);
         else if (mov == 'M') {
             if (dir == 'N') y++;
@@ -91,7 +92,7 @@ utils.processStringInput = (input) => {
     for (var i = 1; i < inputs.length; i++) {
         rover_number = (i == 1 ? i : (i / 2) + 0.5);
         try {
-            if (typeof inputs[i+1] == 'undefined') rover_object = {error: "Error - Only one line of instruction found for Rover number " + rover_number.toString(), success: false, journey: []}
+            if (typeof inputs[i+1] == 'undefined') rover_object = {error: "Error - Only one line of instruction found for Rover number " + rover_number.toString(), success: false, journey: []};
             else rover_object = processMovementsRover(inputs[i], inputs[i+1]);
         }
         catch (e) {
